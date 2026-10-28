@@ -1,0 +1,32 @@
+prg 8:
+
+use e_shopping
+
+db.product.insertMany([
+    { name: "Laptop", category: "Electronics", price: 1200, stock: 50 },
+    { name: "Mouse", category: "Electronics", price: 25, stock: 200 },
+    { name: "Keyboard", category: "Electronics", price: 75, stock: 150 },
+    { name: "Desk Chair", category: "Furniture", price: 300, stock: 30 },
+    { name: "Coffee Table", category: "Furniture", price: 150, stock: 40 },
+    { name: "Bookcase", category: "Furniture", price: 200, stock: 20 },
+    { name: "T-Shirt", category: "Apparel", price: 20, stock: 500 },
+    { name: "Jeans", category: "Apparel", price: 60, stock: 100 }
+]);
+
+db.product.find({category:"Electronics", price: { $lt: 100 }})
+
+db.product.find().sort({ price: 1 })
+
+db.product.find({ category: "Furniture" }).sort({ stock: -1 });
+
+db.product.find({ category: "Electronics", price: { $gt: 50 } }).sort({ name: 1 });
+
+db.product.getIndexKeys()
+
+db.product.getIndexes()
+
+db.product.createIndex({ category: 1, price: 1 });
+
+db.product.getIndexKeys()
+
+db.product.getIndexes()

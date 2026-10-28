@@ -1,0 +1,43 @@
+prg 7:
+
+use e_shopping
+
+db.s_mark.insertOne({_id:1,sname:"Arun",java:76,cn:73,os:98});
+
+db.s_mark.insertMany([
+    {_id:2,sname:"banu",java:67,cn:56,os:76},
+    {_id:3,sname:"chitra",java:89,cn:67,os:54},
+    {_id:4,sname:"dharshan",java:73,cn:45,os:69}
+]);
+
+db.s_mark.aggregate([
+    {
+        $addFields: {
+            totalmark: { $sum: ["$java", "$cn", "$os"] }
+        }
+    }
+]);
+
+db.s_mark.aggregate([
+    {
+        $addFields: {
+            totalmark: { $add: ["$java", "$cn", "$os"] },
+            percentage: {
+                $multiply: [
+                    { $divide: [{ $add: ["$java", "$cn", "$os"] }, 300] },
+                    100
+                ]
+            }
+        }
+    }
+]);
+
+db.s_mark.updateOne({_id:1}, {$set: {"edu_status": "regular"}});
+
+db.s_mark.updateOne({_id:2}, {$set: {"edu_status": "intern"}});
+
+db.s_mark.updateOne({_id:3}, {$set: {"edu_status": "regular"}});
+
+db.s_mark.updateOne({_id:4}, {$set: {"edu_status": "intern"}});
+
+db.s_mark.find();

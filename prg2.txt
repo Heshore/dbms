@@ -1,0 +1,37 @@
+prg2: 
+
+CREATE TABLE customer(c_id int primary key,c_name varchar(10),email varchar(25),phonenumber varchar(10));
+
+INSERT INTO customer VALUES(1071,'sethu','sethu@gmail.com','7634529806');
+
+INSERT INTO customer VALUES(1072,'mani','mani@gmail.com','9843978076'),(1073,'jancy','jancy15@gmail.com','9342156567');
+
+SELECT * FROM customer;
+
+DESC customer;
+
+CREATE TABLE vehicle(vid int primary key,v_type enum('car','van','bus'),capacity int);
+
+DESC vehicle;
+
+INSERT INTO vehicle VALUES(1001,'car',4);
+
+INSERT INTO vehicle VALUES(1200,'van',10);
+
+INSERT INTO vehicle VALUES(1201,'bus',52);
+
+INSERT INTO vehicle VALUES(1201,'bike',1);
+
+SELECT * FROM vehicle;
+
+CREATE TABLE reserve(r_id int primary key,c_id int,vid int,start_datetime datetime check(start_datetime >= '2025-10-25'),end_datetime datetime,place varchar(15),foreign key(c_id) references customer(c_id),foreign key(vid) references vehicle(vid));
+
+DESC reserve;
+
+INSERT INTO reserve VALUES(1,1071,1200,'2025-10-26 06:00:00','2025-10-26 09:00:00','salem');
+
+INSERT INTO reserve VALUES(2,1073,1201,'2025-10-25 10:30:00','2025-10-27 06:00:00','delhi');
+
+INSERT INTO reserve VALUES(3,1072,1200,'2025-10-20 10:00:00','2025-10-25 08:00:00','madurai');
+
+SELECT * FROM reserve;

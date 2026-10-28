@@ -1,0 +1,11 @@
+prg 10:
+
+use sample
+
+db.stock_data.find({
+    profit: { $gt: 0.5 }
+});
+
+db.stock_data.find({
+    growth: { $lt: 0 }
+});

@@ -1,0 +1,44 @@
+pr6:
+
+use e_shopping
+
+db.createCollection("collegeshop")
+
+db.collegeshop.insertOne({item:"notebook",qty:50})
+
+db.collegeshop.insertMany([
+    {item:"ballpointpen",qty:100},
+    {item:"inkpen",qty:60}
+])
+
+db.collegeshop.find({qty:{$gt:15}})
+
+db.collegeshop.findOne({item:"ballpointpen"})
+
+db.collegeshop.find({qty:{$gt:30,$lt:100}})
+
+db.collegeshop.find({qty:{$gte:60,$lte:100}})
+
+db.collegeshop.updateOne(
+    {item:"notebook"},
+    {$set:{"category":"paperstuff"}}
+)
+
+db.collegeshop.find()
+
+db.collegeshop.updateOne(
+    {item:"ballpointpen"},
+    {$set:{"category":"writingstuff"}}
+)
+
+db.collegeshop.updateOne(
+    {item:"inkpen"},
+    {$set:{"category":"writingstuff"}}
+)
+
+db.collegeshop.updateMany(
+    {category:"writingstuff"},
+    {$set:{status:"available"}}
+)
+
+db.collegeshop.find()

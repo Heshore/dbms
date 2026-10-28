@@ -1,0 +1,28 @@
+prg9:
+
+// a) Find all users who are more than 12 years old
+db.student.find({age: {$gt:12}})
+
+// b) Find a list of all users with the same firstname
+db.student.aggregate([
+    {
+        $group: {
+            _id: "$firstname",
+            count: { $sum: 1 },
+            users: { $push: "$$ROOT" }
+        }
+    },
+    {
+        $match: {
+            count: { $gt: 1 }
+        }
+    }
+]);
+
+// c) Find a user by email
+db.student.findOne(
+    { email: { $regex: "@gmail\\.com$", $options: "i" } }
+);
+
+// d) Find a document by id
+db.student.findOne({ _id: 2 });
